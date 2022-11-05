@@ -9,6 +9,7 @@ import AppHeader from "@/components/app-header";
 import AppFooter from "@/components/app-footer";
 // import { IRootState } from './store';
 
+
 function App() {
 
   const { count, message } = useAppSelector((state) => ({
@@ -24,10 +25,16 @@ function App() {
   return (
     <div className="App">
       < AppHeader />
+      <AppFooter />
+
       <Suspense fallback="">
         {useRoutes(routes)}
       </Suspense>
-      <AppFooter />
+
+      <button onClick={handleChangeMessage}>修改message</button>
+      <h2>當前計數: { count } {message}</h2>
+      <ClassDemo name="wyatt"/>
+
     </div>
   );
 }
