@@ -5,7 +5,7 @@ import {Input} from "antd";
 import { SearchOutlined } from "@ant-design/icons";
 import { HeaderWrapper, HeaderLeft, HeaderRight } from "@/components/app-header/style";
 
-import headerTitles from "@/assets/data/header-titles.json"
+import headerTitles from "@/assets/data/header_titles.json"
 
 
 interface IProps {

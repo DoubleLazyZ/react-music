@@ -1,45 +1,25 @@
 import React, { memo, useState, useEffect } from "react"
 import type { FC, ReactNode } from "react"
 import wgRequest from '@/service'
+import {useAppDispatch} from "@/store";
+import {fetchBannerDataAction} from "@/views/discover/child-views/recommend/store/recommend";
+import Slider from '@/views/discover/child-views/recommend/c-cpns/slider'
+
 interface IProps {
   children?: ReactNode
 }
 
-interface IBanner {
-  imageUrl: string
-  targetId: number
-  targetType: number
-  titleColor: string
-  typeTitle: string
-  url: string
-  exclusive: boolean
-  scm: string
-  bannerBizType: string
-}
 
 const Recommend: FC<IProps> = () => {
-  const [banners, setBanners] = useState<IBanner[]>([])
+  const dispatch = useAppDispatch();
 
   useEffect(() => {
-    wgRequest
-      .get({
-        url: '/banner'
-      })
-      .then((res) => {
-        console.log(res)
-        setBanners(res.data.banners)
-      })
+    dispatch(fetchBannerDataAction())
   }, [])
-
   return (
     <div>
-      {
-        banners.map((item, index) => {
-          return (
-            <div key={index}>{item.imageUrl}</div>
-          )
-        })
-      }
+      <Slider/>
+      Recommend
     </div>
   )
 }
