@@ -1,4 +1,4 @@
-export const BASE_URL = "//codercba.com:9002"
+export const BASE_URL = "http://codercba.com:9002/api"
 export const TIME_OUT = 10000
 
 //

@@ -56,6 +56,7 @@
     "@typescript-eslint/parser": "^5.42.0",
     "eslint": "^8.26.0",
     "eslint-plugin-react": "^7.31.10",
+    "http-proxy-middleware": "^2.0.6",
     "styled-components": "^5.3.6"
   }
 }
