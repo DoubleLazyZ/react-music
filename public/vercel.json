@@ -1,5 +1,5 @@
 {
   "rewrites": [
-    { "source": "/api", "destination": "http://codercba.com:9002" }
+    { "source": "/api/:path*", "destination": "http://codercba.com:9002/:path*" }
   ]
 }
