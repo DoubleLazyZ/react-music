@@ -19,11 +19,9 @@ const Slider: FC<IProps> = () => {
   }), shallowEqual)
 
   function handlePrevClick() {
-    console.log('prev')
     bannerRef.current?.prev()
   }
   function handleNextClick() {
-    console.log('next')
     bannerRef.current?.next()
   }
 
@@ -32,7 +30,6 @@ const Slider: FC<IProps> = () => {
   }
 
   function handleAfterChange(current: number) {
-    console.log(current)
     setCurrentIndex(current)
   }
 
@@ -42,7 +39,7 @@ const Slider: FC<IProps> = () => {
     bgImageUrl = banners[currentIndex].imageUrl + '?imageView&blur=40x20'
   }
 
-  console.log(bgImageUrl)
+
 
   return (
     <BannerWrapper style={{

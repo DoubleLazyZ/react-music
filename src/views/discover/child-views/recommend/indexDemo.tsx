@@ -26,7 +26,6 @@ const Recommend: FC<IProps> = () => {
         url: '/banner'
       })
       .then((res) => {
-        console.log(res)
         setBanners(res.data.banners)
       })
   }, [])
