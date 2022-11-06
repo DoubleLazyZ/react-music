@@ -1,4 +1,5 @@
-export const BASE_URL = "https://codercba.com:9002/api"
+// export const BASE_URL = "https://codercba.com:9002/api"
+export const BASE_URL = "https://netease-cloud-music-fh9pofs0h-doublelazyz.vercel.app/"
 export const TIME_OUT = 10000
 
 //
