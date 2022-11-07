@@ -27,7 +27,7 @@ function App() {
       <Suspense fallback="">
         {useRoutes(routes)}
       </Suspense>
-      <AppFooter />
+      {/*<AppFooter />*/}
     </div>
   );
 }

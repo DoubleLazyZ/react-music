@@ -34,3 +34,12 @@ export function getPlaylistDetail(id: number) {
     }
   })
 }
+
+export function getArtistsList() {
+  return wgRequest.get({
+    url: '/artist/list',
+    params: {
+      limit: 5
+    }
+  })
+}
