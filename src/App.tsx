@@ -4,10 +4,9 @@ import { shallowEqual } from 'react-redux';
 import routes from './router';
 import { useAppSelector, useAppDispatch } from './store'
 import { changeMessageAction } from './store/modules/counter';
-import ClassDemo from "@/views/demo/ClassDemo";
+
 import AppHeader from "@/components/app-header";
-import AppFooter from "@/components/app-footer";
-// import { IRootState } from './store';
+import PlayerBar from "@/views/player/player-bar";
 
 function App() {
 
@@ -28,6 +27,7 @@ function App() {
         {useRoutes(routes)}
       </Suspense>
       {/*<AppFooter />*/}
+      <PlayerBar/>
     </div>
   );
 }
