@@ -1,7 +1,49 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { parseLyric } from "@/utils/parse-lyric"
+import type { ILyric } from "@/utils/parse-lyric"
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit"
+import { getSongDetail, getSongLyric } from "../service/player"
+import { IRootState } from "@/store"
+
+export const fetchCurrentSongAction = createAsyncThunk<void, number, { state: IRootState}>(
+  'currentSong',
+  (id: number, { dispatch, getState }) => {
+    
+    const playSongList = getState().player.playSongList
+    const findIndex = playSongList.findIndex((item) => item.id === id)
+    if (findIndex === -1) {
+      getSongDetail(id).then(res => { 
+        if(!res.data.songs.length) return
+        const song = res.data.songs[0]
+
+        const newPlaySongList = [...playSongList]
+        newPlaySongList.push(song)
+        dispatch(changeCurrentSongAction(song))
+        dispatch(changePlaySongAction(newPlaySongList))
+        dispatch(changePlaySongIndexAction(newPlaySongList.length - 1))
+      })
+    } else {
+      const song = playSongList[findIndex]
+      dispatch(changeCurrentSongAction(song))
+      dispatch(changePlaySongIndexAction(findIndex))
+    }
+
+
+
+    getSongLyric(id).then(res => {
+      if(!res.data.lrc) return 
+      const lyrics = parseLyric(res.data.lrc.lyric)
+      dispatch(changeLyricsAction(lyrics))
+    })
+  }
+)
 
 interface IPlayerState {
-  currentSong: any
+  currentSong: any,
+  lyrics: ILyric[],
+  lyricIndex: number,
+  playSongList: any[],
+  playSongIndex: number,
+  playMode: number
 }
 
 const initialState: IPlayerState = {
@@ -96,13 +138,41 @@ const initialState: IPlayerState = {
     "rurl": null,
     "mv": 0,
     "publishTime": 0
-  }
+  },
+  lyrics: [],
+  lyricIndex: -1,
+  playSongList: [],
+  playSongIndex: -1,
+  playMode: 0
 }
 
 const playerSlice = createSlice({
   name: 'player',
   initialState,
-  reducers: {}
+  reducers: {
+    changeCurrentSongAction(state, { payload }) {
+      state.currentSong = payload
+    },
+    changeLyricsAction(state, { payload }) {
+      state.lyrics = payload
+    },
+    changeLyricIndexAction(state, { payload }) {
+      state.lyricIndex = payload
+    },
+    changePlaySongAction(state, { payload }) {
+      state.playSongList = payload
+    },
+    changePlaySongIndexAction(state, { payload }) {
+      state.playSongIndex = payload
+    },
+    changePlayModeAction(state, { payload }) {
+      state.playMode = payload
+    }
+  }
 })
 
+export const { 
+  changeCurrentSongAction, changeLyricsAction, changeLyricIndexAction, 
+  changePlaySongAction, changePlaySongIndexAction , changePlayModeAction
+} = playerSlice.actions
 export default playerSlice.reducer

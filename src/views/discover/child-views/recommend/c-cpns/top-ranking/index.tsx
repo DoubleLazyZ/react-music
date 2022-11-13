@@ -4,6 +4,7 @@ import { RankingWrapper } from "@/views/discover/child-views/recommend/c-cpns/to
 import AreaHeaderV1 from "@/components/area-header-v1";
 import {useAppSelector} from "@/store";
 import TopRankingItem from "@/views/discover/child-views/recommend/c-cpns/top-ranking-item";
+import { shallowEqual } from 'react-redux';
 
 interface IProps {
   children?: ReactNode
@@ -11,9 +12,9 @@ interface IProps {
 
 const TopRaking: FC<IProps> = () => {
 
-  const { rankings } = useAppSelector((state) => ({
+  const { rankings = [] } = useAppSelector((state) => ({
     rankings: state.recommend.rankings
-  }))
+  }), shallowEqual)
 
   return (
     <RankingWrapper>
